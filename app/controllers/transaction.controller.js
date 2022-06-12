@@ -20,10 +20,9 @@ exports.create = async(req, res) => {
         userId:userId 
     };
     // Save transaction in the database
-    await Transaction.create(transaction)
-      .then(data => {
-        res.send(data);
-      })
+    var data=await Transaction.create(transaction)
+       res.send(data);
+  
     }catch(err) {
         res.status(500).send({
           message:
@@ -37,10 +36,9 @@ exports.create = async(req, res) => {
   
     let userId =req.userId
    
-    await Transaction.findAll({where:{userId:userId}})
-      .then(data => {
+   var data= await Transaction.findAll({where:{userId:userId}})
         res.send(data);
-      })
+    
     }catch(err) {
         res.status(500).send({
           message:

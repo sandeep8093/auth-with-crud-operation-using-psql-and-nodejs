@@ -14,9 +14,9 @@ exports.signup = async(req, res) => {
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8)
   })
-    .then(user => {
+   
       res.send({ message: "User was registered successfully!" });
-    })
+    
   }catch(err) {
       res.status(500).send({ message: err.message });
     };
@@ -25,12 +25,12 @@ exports.signup = async(req, res) => {
 
 exports.signin = async(req, res) => {
   try{
-    await User.findOne({
+    var user=await User.findOne({
     where: {
       username: req.body.username
     }
   })
-    .then(user => {
+    
       if (!user) {
         return res.status(404).send({ message: "User Not found." });
       }
@@ -54,7 +54,7 @@ exports.signin = async(req, res) => {
           email: user.email,
           accessToken: token
         });
-      })
+      
     }catch (err) {
       res.status(500).send({ message: err.message })
     }
