@@ -11,7 +11,7 @@ exports.create = async(req, res) => {
       });
       return;
     }
-    let userId=req.user.id;
+    let userId=req.userId;
     // Create a transaction
     const transaction = {
         amount: req.body.amount,
@@ -34,8 +34,8 @@ exports.create = async(req, res) => {
 
   exports.findAll = async(req, res) => {
   try{  
-    console.log(id)
-    let userId =req.user.id
+  
+    let userId =req.userId
    
     await Transaction.findAll({where:{userId:userId}})
       .then(data => {
