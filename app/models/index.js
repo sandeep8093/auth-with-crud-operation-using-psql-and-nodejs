@@ -20,12 +20,8 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
-db.account = require("../models/account.model.js")(sequelize, Sequelize);
+db.transaction = require("../models/transaction.model.js")(sequelize, Sequelize);
 
-db.user.belongsToMany(db.account, {
-  through: "user_accounts",
-  foreignKey: "userId",
-  otherKey: "roleId"
-});
-
+db.user.hasMany(db.transaction, {foreignKey:"userId"})
+db.transaction.belongsTo(db.user, {foreignKey:"userId"})
 module.exports = db;

@@ -1,5 +1,5 @@
 const { authJwt } = require("../middleware");
-const accounts = require("../controllers/account.controller.js");
+const transactions = require("../controllers/transaction.controller.js");
 
     
 module.exports = function(app) {
@@ -11,11 +11,11 @@ module.exports = function(app) {
     next();
   });
   
-  app.get("/api/account/all",accounts.findAll);
+  app.get("/api/transaction/all",[authJwt.verifyToken],transactions.findAll);
   app.post(
-    "/api/account/create",
+    "/api/transaction/create",
     [authJwt.verifyToken],
-    accounts.create
+    transactions.create
   );
   
 };

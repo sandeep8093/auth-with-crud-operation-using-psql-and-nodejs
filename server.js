@@ -14,8 +14,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
 
-db.sequelize.sync({force: true}).then(() => {
-  console.log('Drop and Resync Db');
+db.sequelize.sync({ alter: false }) .then(() => {
+  console.log(' Resync Db');
 });
 
 
@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to application." });
 });
 require('./app/routes/auth.routes')(app);
-require('./app/routes/account.routes')(app);
+require('./app/routes/transaction.routes')(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
